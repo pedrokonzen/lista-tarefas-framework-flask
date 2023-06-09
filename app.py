@@ -2,33 +2,41 @@ from flask import Flask, redirect, render_template, request
 
 app = Flask(__name__)
 
-tasks = []  # Lista de tarefas (inicialmente vazia)
-    
+tasks = ["x" , "y" , "z"]  # Lista de tarefas (inicialmente vazia)
+task_status = ["", "", ""]  # Lista de status das tarefas
+
 @app.route('/')
 def index():
-    return render_template('index.html', tasks=tasks)
+    return render_template('index.html', tasks=tasks, task_status=task_status)
 
 @app.route('/add_task', methods=['POST'])
 def add_task():
     task = request.form['task']
     tasks.append(task)
-
-    # Lógica para adicionar a tarefa ao banco de dados ou à lista de tarefas existente
+    task_status.append("")
     return redirect('/')
 
-@app.route('/update_task/<int:task_id>', methods=['POST'])
-def update_task(task_id):
+@app.route('/update_task/<int:index>', methods=['POST'])
+def update_task(index):
     task = request.form['task']
-    tasks[task_id] = task
-
-    # Lógica para atualizar a tarefa no banco de dados ou na lista de tarefas existente
+    tasks[index] = task
     return redirect('/')
 
-@app.route('/delete_task/<int:task_id>', methods=['GET', 'POST'])
-def delete_task(task_id):
-    del tasks[task_id]
+@app.route('/complete_task/<int:index>', methods=['POST'])
+def complete_task(index):
+    task_status[index] = "completed"
     return redirect('/')
 
+@app.route('/cancel_task/<int:index>', methods=['POST'])
+def cancel_task(index):
+    task_status[index] = "cancelled"
+    return redirect('/')
+
+@app.route('/delete_task/<int:index>', methods=['POST'])
+def delete_task(index):
+    del tasks[index]
+    del task_status[index]
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run()

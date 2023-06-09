@@ -2,32 +2,99 @@
 <html>
 <head>
     <title>Lista de Tarefas</title>
+    <style>
+        /* Estilos para alinhar o conteúdo */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .completed {
+            color: green;
+        }
+
+        .cancelled {
+            color: red;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
 </head>
 <body>
     <h1>Lista de Tarefas</h1>
-    <ul>
-        {% for index in range(tasks|length) %}
-        <li>
-            {{ tasks[index] }}
-            <form action="/update_task/{{ index }}" method="POST" style="display: inline;">
-                <input type="text" name="task" value="{{ tasks[index] }}">
-                <button type="submit">Atualizar</button>
-            </form>
-            <form action="/delete_task/{{ index }}" method="POST" style="display: inline;">
-                <button type="submit">Excluir</button>
-            </form>
-        </li>
-        {% endfor %}
-    </ul>
     <form action="/add_task" method="POST">
         <input type="text" name="task">
         <button type="submit">Adicionar</button>
     </form>
+    <table>
+        <tr>
+            <th>Tarefa</th>
+            <th>Ações</th>
+        </tr>
+        {% for index in range(tasks|length) %}
+        <tr>
+            <td>
+                <span id="task_{{ index }}" class="{{ task_status[index] }}">{{ tasks[index] }}</span>
+                <form id="update_form_{{ index }}" style="display: none;" action="/update_task/{{ index }}" method="POST">
+                    <input type="text" name="task" value="{{ tasks[index] }}">
+                    <button type="submit">Atualizar</button>
+                </form>
+            </td>
+            <td>
+                <i class="far fa-edit" onclick="toggleForm('{{ index }}')"></i>
+                <form action="/complete_task/{{ index }}" method="POST" style="display: inline;">
+                    <button type="submit"><i class="fas fa-check"></i></button>
+                </form>
+                <form action="/cancel_task/{{ index }}" method="POST" style="display: inline;">
+                    <button type="submit"><i class="fas fa-times"></i></button>
+                </form>
+                <form action="/delete_task/{{ index }}" method="POST" style="display: inline;">
+                    <button type="submit"><i class="fas fa-trash-alt"></i></button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
 
     <script>
-        // Função para exibir um alerta de confirmação antes de excluir uma tarefa
-        function confirmDelete() {
-            return confirm("Tem certeza de que deseja excluir esta tarefa?");
+        var activeForm = null;
+
+        function toggleForm(index) {
+            var taskElement = document.getElementById('task_' + index);
+            var formElement = document.getElementById('update_form_' + index);
+
+            if (formElement.style.display === 'none') {
+                if (activeForm !== null) {
+                    activeForm.style.display = 'none';
+                }
+
+                taskElement.style.display = 'none';
+                formElement.style.display = 'inline';
+                activeForm = formElement;
+            } else {
+                taskElement.style.display = 'inline';
+                formElement.style.display = 'none';
+                activeForm = null;
+            }
         }
     </script>
 </body>

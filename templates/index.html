@@ -9,7 +9,13 @@
         {% for index in range(tasks|length) %}
         <li>
             {{ tasks[index] }}
-           
+            <form action="/update_task/{{ index }}" method="POST" style="display: inline;">
+                <input type="text" name="task" value="{{ tasks[index] }}">
+                <button type="submit">Atualizar</button>
+            </form>
+            <form action="/delete_task/{{ index }}" method="POST" style="display: inline;">
+                <button type="submit">Excluir</button>
+            </form>
         </li>
         {% endfor %}
     </ul>

@@ -2,8 +2,8 @@ from flask import Flask, redirect, render_template, request
 
 app = Flask(__name__)
 
-tasks = ["x" , "y" , "z"]  # Lista de tarefas (inicialmente vazia)
-task_status = ["", "", ""]  # Lista de status das tarefas
+tasks = []  # Lista de tarefas (inicialmente vazia)
+task_status = []  # Lista de status das tarefas
 
 @app.route('/')
 def index():
@@ -37,6 +37,10 @@ def delete_task(index):
     del tasks[index]
     del task_status[index]
     return redirect('/')
+
+@app.route('/relatorio_page')
+def relatorio_page():
+    return render_template('relatorio_page.html')
 
 if __name__ == '__main__':
     app.run()

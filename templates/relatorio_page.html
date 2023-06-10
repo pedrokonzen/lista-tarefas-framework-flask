@@ -75,14 +75,122 @@
     </h3>
 
 
-    <h5>Python - Flask</h5>
-    <p></p>
-    <h5>Java - Spring Boot</h5>
-    <p></p>
-    <h5>PHP - Laravel</h5>
-    <P></P>
-    <h5>JavaScript - React</h5>
-    <p></p>
+    <h4>Python - Flask</h4>
+
+    <P>
+        from flask import Flask<br>
+        app = Flask(__name__)<br>
+        @app.route('/')<br>
+        def raiz(): <br>
+        return "Olá Mundo"<br>
+
+        @app.route('/rota1')<br>
+        def rota1():<br>
+        return "Esse é o Framework Flask"<br>
+
+        @app.run()<br>
+    <P>
+
+    <h5>Explicação:</h5>
+
+    <p>
+        Esse código define duas rotas em uma aplicação Flask em Python.
+        Quando a rota raiz ("/") é acessada, a mensagem
+        "Olá Mundo" é exibida, e quando a rota "/rota1" é acessada, a
+        mensagem "Esse é o Framework Flask" é exibida. A
+        aplicação Flask é então executada para receber e responder às
+        solicitações web.
+
+    </p>
+
+
+
+    <h4>Java - Spring Boot</h4>
+    <P>
+        package com.firstProject.hellollorld.controller;<br>
+
+        import org.springframework.web.bind.annotation.GetMapping;<br>
+        import org.springframework.web.bind.annotation.RestController;<br>
+
+        @RestController<br>
+        public class Hellocontroller {<br>
+
+        @GetMapping("/")<br>
+        public String helloMessage (){<br>
+        return "olá Mundo";<br>
+        }<br>
+        }<br>
+    </P>
+    <h5>Explicação:</h5>
+
+    <p>
+        O código define um controlador em uma aplicação Spring Boot
+        em Java. Quando a rota raiz ("/") é acessada com uma
+        solicitação GET, a mensagem "olá Mundo" será retornada como
+        resposta. O controlador é definido como uma classe anotada com @RestController, 
+        indicando que ele será responsável por lidar com as 
+        requisições HTTP e fornecer respostas.
+
+    </p>
+
+
+
+    <h4>PHP - Laravel</h4>
+
+    <P>
+
+        use Illuminate\Support\Facades\Route;<br>
+        use App\Http\Controllers\HelloController;<br>
+        Route::get('/hello', [HelloController::class, 'index']);<br>
+        <br>
+        namespace App\Http\Controllers;<br>
+
+        use Illuminate\Http\Request; <br>
+
+        class HelloController extends Controller<br>
+        {<br>
+        public function index()<br>
+        {<br>
+        return 'Hello World!';<br>
+        }<br>
+        }<br>
+    </P>
+    <h5>Explicação:</h5>
+
+    <p>
+        O controlador HelloController está dentro do
+        namespace App\Http\Controllers e contém um único
+        método chamado index. Quando a rota /hello é
+        acessada, esse método é executado. No caso desse
+        exemplo, o método retorna a string "Hello World!". </p>
+    <br>
+
+
+
+    <h4>JavaScript - React</h4>
+    <P>
+        import React from 'react':<br>
+
+        class HelloWorld extends React.Component <br>
+        render (){<br>
+        return 'ola, mundo';<br>
+        }<br>
+        export default HelloWorld;<br>
+    </P>
+    <h5>Explicação:</h5>
+
+    <p>
+        Dentro da classe HelloWorld, há um método chamado render().
+        Esse método é usado para renderizar o conteúdo do
+        componente na tela. No exemplo, o método render() retorna a string
+        "ola, mundo".
+        Por fim, o componente é exportado usando export default HelloWorld,
+        o que significa que ele pode ser importado e
+        usado em outros arquivos dentro do projeto.
+    </p>
+    <br>
+
+
 
 
     <a href="/">Voltar para a lista de tarefas</a>

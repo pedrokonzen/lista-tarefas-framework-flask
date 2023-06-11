@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Lista de Tarefas</title>
     <style>
-        /* Estilos para alinhar o conteúdo */
         body {
             margin: 0;
             padding: 0;
@@ -22,7 +22,8 @@
             margin-top: 20px;
         }
 
-        th, td {
+        th,
+        td {
             padding: 8px;
             text-align: left;
             border-bottom: 1px solid #ddd;
@@ -36,8 +37,10 @@
             color: red;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" />
 </head>
+
 <body>
     <h1>Lista de Tarefas</h1>
     <form action="/add_task" method="POST">
@@ -53,7 +56,8 @@
         <tr>
             <td>
                 <span id="task_{{ index }}" class="{{ task_status[index] }}">{{ tasks[index] }}</span>
-                <form id="update_form_{{ index }}" style="display: none;" action="/update_task/{{ index }}" method="POST">
+                <form id="update_form_{{ index }}" style="display: none;" action="/update_task/{{ index }}"
+                    method="POST">
                     <input type="text" name="task" value="{{ tasks[index] }}">
                     <button type="submit">Atualizar</button>
                 </form>
@@ -100,4 +104,5 @@
         }
     </script>
 </body>
+
 </html>
